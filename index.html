@@ -1,0 +1,667 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ravelo 1986 — Classic Clothing, Made to Last</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400;1,9..144,500&family=Work+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#211d17;
+    --parchment:#efe8d8;
+    --parchment-2:#e6dcc4;
+    --hunter:#28402f;
+    --hunter-dark:#1b2b21;
+    --oxblood:#732c2c;
+    --brass:#a5813a;
+    --off-white:#faf7ee;
+    --line:rgba(33,29,23,0.22);
+    --stitch: repeating-linear-gradient(90deg, var(--ink) 0 6px, transparent 6px 12px);
+    --ease: cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    background:var(--parchment);
+    color:var(--ink);
+    font-family:'Work Sans', sans-serif;
+    -webkit-font-smoothing:antialiased;
+  }
+
+  body::before{
+    content:"";
+    position:fixed;
+    inset:0;
+    pointer-events:none;
+    z-index:2000;
+    opacity:0.035;
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    mix-blend-mode:multiply;
+  }
+
+  h1,h2,h3{
+    font-family:'Fraunces', serif;
+    margin:0;
+    font-weight:500;
+    letter-spacing:-0.01em;
+  }
+
+  a{color:inherit;}
+
+  .eyebrow{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:12px;
+    letter-spacing:0.14em;
+    text-transform:uppercase;
+    color:var(--hunter);
+  }
+
+  .stitch-rule{
+    height:2px;
+    background:var(--stitch);
+    background-size:12px 2px;
+    opacity:0;
+    transform:scaleX(0);
+    transform-origin:left;
+    transition:transform 0.9s var(--ease), opacity 0.4s ease;
+  }
+  .stitch-rule.in-view{opacity:0.45; transform:scaleX(1);}
+
+  .reveal{
+    opacity:0;
+    transform:translateY(28px);
+    transition:opacity 0.8s var(--ease), transform 0.8s var(--ease);
+  }
+  .reveal.in-view{opacity:1; transform:translateY(0);}
+  .reveal-stagger > *{
+    opacity:0;
+    transform:translateY(24px);
+    transition:opacity 0.7s var(--ease), transform 0.7s var(--ease);
+  }
+  .reveal-stagger.in-view > *{opacity:1; transform:translateY(0);}
+  .reveal-stagger.in-view > *:nth-child(1){transition-delay:0.02s;}
+  .reveal-stagger.in-view > *:nth-child(2){transition-delay:0.1s;}
+  .reveal-stagger.in-view > *:nth-child(3){transition-delay:0.18s;}
+  .reveal-stagger.in-view > *:nth-child(4){transition-delay:0.26s;}
+  .reveal-stagger.in-view > *:nth-child(5){transition-delay:0.34s;}
+  .reveal-stagger.in-view > *:nth-child(6){transition-delay:0.42s;}
+
+  @media (prefers-reduced-motion: reduce){
+    *, *::before, *::after{
+      animation-duration:0.001ms !important;
+      animation-iteration-count:1 !important;
+      transition-duration:0.001ms !important;
+      scroll-behavior:auto !important;
+    }
+    .reveal, .reveal-stagger > *, .stitch-rule{opacity:1 !important; transform:none !important;}
+  }
+
+  .wrap{
+    max-width:1120px;
+    margin:0 auto;
+    padding:0 32px;
+  }
+
+  /* NAV */
+  header{
+    position:sticky; top:0; z-index:100;
+    background:rgba(239,232,216,0.92);
+    backdrop-filter:blur(6px);
+    border-bottom:1px solid transparent;
+    transition:border-color 0.4s var(--ease), box-shadow 0.4s var(--ease);
+  }
+  header.is-scrolled{
+    border-bottom-color:var(--line);
+    box-shadow:0 8px 24px -18px rgba(33,29,23,0.35);
+  }
+  nav.wrap{
+    display:flex; align-items:center; justify-content:space-between;
+    height:76px;
+  }
+  .wordmark{
+    font-family:'Fraunces', serif;
+    font-size:20px;
+    font-weight:600;
+    letter-spacing:0.01em;
+  }
+  .wordmark small{
+    display:block;
+    font-family:'IBM Plex Mono', monospace;
+    font-size:10px;
+    letter-spacing:0.2em;
+    font-weight:400;
+    color:var(--oxblood);
+    margin-top:2px;
+  }
+  .nav-links{
+    display:flex; gap:36px;
+    list-style:none; margin:0; padding:0;
+    font-size:14px;
+  }
+  .nav-links a{
+    text-decoration:none;
+    position:relative;
+    padding-bottom:4px;
+  }
+  .nav-links a::after{
+    content:"";
+    position:absolute; left:0; right:0; bottom:0;
+    height:1px; background:var(--ink);
+    transform:scaleX(0); transform-origin:left;
+    transition:transform 0.25s ease;
+  }
+  .nav-links a:hover::after{transform:scaleX(1);}
+  .nav-cta{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:12px;
+    letter-spacing:0.08em;
+    text-transform:uppercase;
+    border:1px solid var(--ink);
+    padding:9px 16px;
+    text-decoration:none;
+  }
+  .nav-cta{transition:background 0.25s var(--ease), color 0.25s var(--ease), transform 0.25s var(--ease);}
+  .nav-cta:hover{background:var(--ink); color:var(--parchment); transform:translateY(-2px);}
+  @media (max-width:800px){ .nav-links{display:none;} }
+
+  /* HERO */
+  .hero{
+    position:relative;
+    padding:96px 0 120px;
+    overflow:visible;
+  }
+  @keyframes rise-in{
+    from{opacity:0; transform:translateY(22px);}
+    to{opacity:1; transform:translateY(0);}
+  }
+  @keyframes tag-drop{
+    0%{opacity:0; transform:rotate(4deg) translateY(-28px);}
+    60%{opacity:1; transform:rotate(4deg) translateY(4px);}
+    100%{opacity:1; transform:rotate(4deg) translateY(0);}
+  }
+  .hero-in{
+    opacity:0;
+    animation:rise-in 0.9s var(--ease) forwards;
+  }
+  .hero-in[data-d="1"]{animation-delay:0.05s;}
+  .hero-in[data-d="2"]{animation-delay:0.2s;}
+  .hero-in[data-d="3"]{animation-delay:0.36s;}
+  .hero-in[data-d="4"]{animation-delay:0.5s;}
+  .hero-in[data-d="5"]{animation-delay:0.65s;}
+  .hero .wrap{
+    position:relative;
+    display:grid;
+    grid-template-columns:1.4fr 0.9fr;
+    gap:48px;
+    align-items:end;
+  }
+  .hero h1{
+    font-size:clamp(48px, 7vw, 92px);
+    line-height:0.98;
+  }
+  .hero h1 em{
+    font-style:italic;
+    color:var(--oxblood);
+  }
+  .hero p.sub{
+    max-width:44ch;
+    margin:28px 0 36px;
+    font-size:18px;
+    line-height:1.55;
+    color:var(--ink);
+  }
+  .hero-actions{display:flex; gap:16px; align-items:center;}
+  .btn-primary{
+    background:var(--hunter);
+    color:var(--off-white);
+    text-decoration:none;
+    font-family:'IBM Plex Mono', monospace;
+    font-size:13px;
+    letter-spacing:0.06em;
+    text-transform:uppercase;
+    padding:15px 26px;
+    display:inline-block;
+    transition:background 0.25s var(--ease), transform 0.25s var(--ease), box-shadow 0.25s var(--ease);
+  }
+  .btn-primary:hover{
+    background:var(--hunter-dark);
+    transform:translateY(-2px);
+    box-shadow:0 10px 20px -10px rgba(27,43,33,0.6);
+  }
+  .btn-ghost{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:13px;
+    letter-spacing:0.06em;
+    text-transform:uppercase;
+    text-decoration:underline;
+    text-underline-offset:4px;
+  }
+
+  /* HANGTAG — signature element */
+  .hangtag{
+    justify-self:end;
+    width:220px;
+    background:var(--off-white);
+    border:1px solid var(--ink);
+    padding:22px 20px 26px;
+    position:relative;
+    transform-origin:top center;
+    opacity:0;
+    animation:tag-drop 1s var(--ease) forwards, tag-sway 6s ease-in-out infinite;
+    animation-delay:0.4s, 1.4s;
+    box-shadow:6px 8px 0 rgba(33,29,23,0.08);
+    transition:box-shadow 0.3s var(--ease), transform 0.3s var(--ease);
+  }
+  .hangtag:hover{
+    animation-play-state:running, paused;
+    box-shadow:9px 12px 0 rgba(33,29,23,0.12);
+  }
+  @keyframes tag-sway{
+    0%, 100%{transform:rotate(4deg);}
+    50%{transform:rotate(1.5deg);}
+  }
+  .hangtag::before{
+    content:"";
+    position:absolute;
+    top:-1px; left:50%;
+    width:16px; height:16px;
+    transform:translate(-50%,-50%);
+    background:var(--parchment);
+    border:1px solid var(--ink);
+    border-radius:50%;
+  }
+  .hangtag::after{
+    content:"";
+    position:absolute;
+    top:-30px; left:50%;
+    width:1px; height:30px;
+    background:var(--ink);
+  }
+  .hangtag .tag-eyebrow{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:10px;
+    letter-spacing:0.16em;
+    text-transform:uppercase;
+    color:var(--oxblood);
+    display:block;
+    margin-bottom:10px;
+  }
+  .hangtag .tag-brand{
+    font-family:'Fraunces', serif;
+    font-size:26px;
+    line-height:1.1;
+    margin-bottom:14px;
+  }
+  .hangtag .tag-rule{
+    height:1px; background:var(--line); margin:14px 0;
+  }
+  .hangtag .tag-meta{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:10.5px;
+    line-height:1.8;
+    color:var(--ink);
+    opacity:0.75;
+  }
+
+  /* SECTION generic */
+  section{padding:88px 0;}
+  .section-head{
+    display:flex;
+    justify-content:space-between;
+    align-items:flex-end;
+    gap:24px;
+    margin-bottom:52px;
+    flex-wrap:wrap;
+  }
+  .section-head h2{font-size:clamp(30px,4vw,44px);}
+  .section-head p{
+    max-width:38ch;
+    font-size:15px;
+    line-height:1.6;
+    color:var(--ink);
+    opacity:0.8;
+    margin:0;
+  }
+
+  /* HERITAGE */
+  .heritage{background:var(--off-white); border-top:1px solid var(--line); border-bottom:1px solid var(--line);}
+  .heritage .wrap{
+    display:grid;
+    grid-template-columns:0.8fr 1.2fr;
+    gap:64px;
+  }
+  .heritage-figure{
+    border:1px solid var(--ink);
+    aspect-ratio:3/4;
+    background:
+      linear-gradient(180deg, transparent 0%, transparent 92%, var(--hunter) 92%, var(--hunter) 100%),
+      repeating-linear-gradient(135deg, var(--parchment-2) 0 18px, var(--parchment) 18px 36px);
+    position:relative;
+  }
+  .heritage-figure span{
+    position:absolute; bottom:14px; left:14px;
+    font-family:'IBM Plex Mono', monospace;
+    font-size:10px; letter-spacing:0.1em; text-transform:uppercase;
+    color:var(--off-white);
+  }
+  .heritage-copy p{
+    font-size:16.5px;
+    line-height:1.75;
+    margin:0 0 20px;
+    max-width:56ch;
+  }
+  .heritage-copy p:first-of-type{font-size:19px; font-family:'Fraunces', serif; font-weight:400;}
+
+  /* COLLECTION */
+  .grid-4{
+    display:grid;
+    grid-template-columns:repeat(4, 1fr);
+    gap:1px;
+    background:var(--line);
+    border:1px solid var(--line);
+  }
+  .piece{
+    background:var(--parchment);
+    padding:26px 22px 24px;
+    display:flex;
+    flex-direction:column;
+    gap:14px;
+    transition:background 0.35s var(--ease), transform 0.35s var(--ease);
+  }
+  .piece:hover{
+    background:var(--off-white);
+    transform:translateY(-6px);
+  }
+  .piece-swatch{
+    aspect-ratio:1/1.15;
+    border:1px solid var(--ink);
+    overflow:hidden;
+    position:relative;
+  }
+  .piece-swatch::after{
+    content:"";
+    position:absolute; inset:0;
+    background:inherit;
+    transition:transform 0.6s var(--ease);
+  }
+  .piece:hover .piece-swatch::after{transform:scale(1.12) rotate(1deg);}
+  .piece-name{transition:color 0.3s ease;}
+  .piece:hover .piece-name{color:var(--oxblood);}
+  .swatch-1{background:repeating-linear-gradient(90deg, #f4efe1 0 6px, #dcd2b3 6px 12px);}
+  .swatch-2{background:linear-gradient(180deg, var(--hunter) 0%, var(--hunter-dark) 100%);}
+  .swatch-3{background:repeating-linear-gradient(45deg, #ece3cc 0 4px, #c9bd97 4px 8px);}
+  .swatch-4{background:var(--oxblood);}
+  .piece-name{font-family:'Fraunces', serif; font-size:18px;}
+  .piece-meta{
+    display:flex; justify-content:space-between; align-items:baseline;
+    font-family:'IBM Plex Mono', monospace;
+    font-size:12px;
+    color:var(--ink);
+    opacity:0.75;
+  }
+  @media (max-width:900px){ .grid-4{grid-template-columns:repeat(2,1fr);} }
+
+  /* DETAILS / craft */
+  .craft{background:var(--hunter-dark); color:var(--parchment);}
+  .craft .section-head p{color:var(--parchment); opacity:0.75;}
+  .craft .eyebrow{color:var(--brass);}
+  .craft-grid{
+    display:grid;
+    grid-template-columns:repeat(3, 1fr);
+    gap:48px;
+  }
+  .craft-item{transition:transform 0.4s var(--ease);}
+  .craft-item:hover{transform:translateY(-4px);}
+  .craft-item .num{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:12px;
+    color:var(--brass);
+    letter-spacing:0.1em;
+    display:inline-block;
+    transition:transform 0.4s var(--ease), color 0.4s ease;
+  }
+  .craft-item:hover .num{transform:translateX(4px); color:var(--parchment);}
+  .craft-item h3{
+    font-size:22px;
+    color:var(--parchment);
+    margin:14px 0 12px;
+  }
+  .craft-item p{
+    font-size:14.5px;
+    line-height:1.7;
+    color:var(--parchment);
+    opacity:0.72;
+    margin:0;
+  }
+  @media (max-width:800px){ .craft-grid{grid-template-columns:1fr; row-gap:36px;} }
+
+  /* NEWSLETTER / CTA band */
+  .cta-band{
+    text-align:center;
+    padding:100px 0;
+  }
+  .cta-band h2{
+    font-size:clamp(32px,5vw,54px);
+    max-width:16ch;
+    margin:0 auto 20px;
+  }
+  .cta-band form{
+    display:flex;
+    justify-content:center;
+    gap:0;
+    max-width:420px;
+    margin:36px auto 0;
+    border:1px solid var(--ink);
+  }
+  .cta-band form{transition:box-shadow 0.3s var(--ease);}
+  .cta-band form:focus-within{box-shadow:0 0 0 3px rgba(40,64,47,0.15);}
+  .cta-band input{
+    flex:1;
+    border:none;
+    background:transparent;
+    padding:15px 16px;
+    font-family:'Work Sans', sans-serif;
+    font-size:14px;
+    color:var(--ink);
+    outline:none;
+  }
+  .cta-band button{
+    border:none;
+    border-left:1px solid var(--ink);
+    background:var(--ink);
+    color:var(--parchment);
+    padding:0 22px;
+    font-family:'IBM Plex Mono', monospace;
+    font-size:12px;
+    letter-spacing:0.08em;
+    text-transform:uppercase;
+    cursor:pointer;
+    transition:background 0.25s ease, letter-spacing 0.25s ease;
+  }
+  .cta-band button:hover{background:var(--hunter); letter-spacing:0.12em;}
+
+  /* FOOTER */
+  footer{
+    border-top:1px solid var(--line);
+    padding:48px 0 40px;
+  }
+  footer .wrap{
+    display:flex;
+    justify-content:space-between;
+    flex-wrap:wrap;
+    gap:24px;
+    font-family:'IBM Plex Mono', monospace;
+    font-size:12px;
+    color:var(--ink);
+    opacity:0.7;
+  }
+  footer .foot-links{display:flex; gap:24px; list-style:none; padding:0; margin:0;}
+  footer .foot-links a{text-decoration:none;}
+  footer .foot-links a:hover{text-decoration:underline;}
+</style>
+</head>
+<body>
+
+<header>
+  <nav class="wrap">
+    <div class="wordmark">RAVELO<small>1986 &middot; CLASSIC CLOTHING</small></div>
+    <ul class="nav-links">
+      <li><a href="#collection">Collection</a></li>
+      <li><a href="#heritage">Heritage</a></li>
+      <li><a href="#craft">Craft</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+    <a class="nav-cta" href="#collection">Shop the collection</a>
+  </nav>
+</header>
+
+<section class="hero">
+  <div class="wrap">
+    <div>
+      <span class="eyebrow hero-in" data-d="1">Est. 1986 &nbsp;/&nbsp; Made to outlast the season</span>
+      <h1 class="hero-in" data-d="2" style="margin-top:18px;">Tailored for<br>the <em>long run.</em></h1>
+      <p class="sub hero-in" data-d="3">Ravelo 1986 makes classic clothing the old way: heavy cottons, natural fibers, and cuts that don't chase trends. Nothing here was designed to be replaced next year.</p>
+      <div class="hero-actions hero-in" data-d="4">
+        <a class="btn-primary" href="#collection">View the collection</a>
+        <a class="btn-ghost" href="#heritage">Our story</a>
+      </div>
+    </div>
+    <div class="hangtag">
+      <span class="tag-eyebrow">Genuine Article</span>
+      <div class="tag-brand">Ravelo<br>1986</div>
+      <div class="tag-rule"></div>
+      <div class="tag-meta">
+        100% NATURAL FIBER<br>
+        MADE TO MEASURE<br>
+        NO. 0186 &mdash; WINTERTHUR
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="stitch-rule"></div>
+
+<section class="heritage" id="heritage">
+  <div class="wrap">
+    <div class="heritage-figure reveal"><span>Ravelo &mdash; Archive, 1986&ndash;present</span></div>
+    <div class="heritage-copy reveal">
+      <span class="eyebrow">Heritage</span>
+      <p style="margin-top:18px;">We started with one shirt pattern and a stubborn idea: clothes should be built, not manufactured.</p>
+      <p>Since 1986, Ravelo has kept to the same principles &mdash; oxford cloth that softens with age, buttons sewn to stay, seams that hold up to actual wear. The silhouettes borrow from the field, the stable, and the university common room: unfussy, generous in the right places, cut to move.</p>
+      <p>We don't chase seasons. Most of what we make today was already correct forty years ago, and we expect it to still be correct forty years from now.</p>
+    </div>
+  </div>
+</section>
+
+<div class="stitch-rule"></div>
+
+<section id="collection">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <h2>The Collection</h2>
+      <p class="eyebrow" style="opacity:1;">Six pieces, built to be worn on rotation for years, not seasons.</p>
+    </div>
+  </div>
+  <div class="wrap" style="padding:0 32px;">
+    <div class="grid-4 reveal-stagger">
+      <div class="piece">
+        <div class="piece-swatch swatch-1"></div>
+        <div class="piece-name">Oxford Cloth Shirt</div>
+        <div class="piece-meta"><span>No. 01</span><span>CHF 140</span></div>
+      </div>
+      <div class="piece">
+        <div class="piece-swatch swatch-2"></div>
+        <div class="piece-name">Shetland Crewneck</div>
+        <div class="piece-meta"><span>No. 02</span><span>CHF 190</span></div>
+      </div>
+      <div class="piece">
+        <div class="piece-swatch swatch-3"></div>
+        <div class="piece-name">Chino Trouser</div>
+        <div class="piece-meta"><span>No. 03</span><span>CHF 160</span></div>
+      </div>
+      <div class="piece">
+        <div class="piece-swatch swatch-4"></div>
+        <div class="piece-name">Field Jacket</div>
+        <div class="piece-meta"><span>No. 04</span><span>CHF 380</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="craft" id="craft">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow">Craft</span>
+    </div>
+    <div class="section-head" style="margin-top:-32px;">
+      <h2>Built the slow way.</h2>
+      <p>Three decisions we don't compromise on, no matter what it costs us in speed.</p>
+    </div>
+    <div class="craft-grid reveal-stagger">
+      <div class="craft-item">
+        <div class="num">01</div>
+        <h3>Natural fiber, always</h3>
+        <p>Long-staple cotton, Shetland wool, waxed canvas. No synthetic blends looking to cut costs at the expense of how a garment ages.</p>
+      </div>
+      <div class="craft-item">
+        <div class="num">02</div>
+        <h3>Cut for movement</h3>
+        <p>Patterns drafted with room in the shoulder and a true waist, so a jacket still fits the way you actually stand and reach.</p>
+      </div>
+      <div class="craft-item">
+        <div class="num">03</div>
+        <h3>Stitched to be repaired</h3>
+        <p>Reinforced seams and spare buttons sewn into every hem, because a piece worth keeping is a piece worth mending.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="cta-band" id="contact">
+  <div class="wrap reveal">
+    <span class="eyebrow">Stay in the loop</span>
+    <h2 style="margin-top:18px;">New arrivals, twice a year. Nothing else.</h2>
+    <form onsubmit="event.preventDefault(); this.querySelector('button').textContent='Signed up';">
+      <input type="email" placeholder="you@email.com" required>
+      <button type="submit">Sign up</button>
+    </form>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <span>&copy; 1986&ndash;2026 Ravelo. Winterthur, Switzerland.</span>
+    <ul class="foot-links">
+      <li><a href="#collection">Collection</a></li>
+      <li><a href="#heritage">Heritage</a></li>
+      <li><a href="mailto:hello@ravelo1986.com">hello@ravelo1986.com</a></li>
+    </ul>
+  </div>
+</footer>
+
+<script>
+  // Header gains a hairline + shadow once the page scrolls
+  const header = document.querySelector('header');
+  const onScroll = () => header.classList.toggle('is-scrolled', window.scrollY > 8);
+  onScroll();
+  window.addEventListener('scroll', onScroll, { passive: true });
+
+  // Scroll-triggered reveals for sections, staggered grids, and stitch rules
+  const revealTargets = document.querySelectorAll('.reveal, .reveal-stagger, .stitch-rule');
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('in-view');
+        io.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.15, rootMargin: '0px 0px -40px 0px' });
+  revealTargets.forEach((el) => io.observe(el));
+</script>
+</body>
+</html>
+</message_continuation>
