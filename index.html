@@ -3,22 +3,21 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Ravelo 1986 — Classic Clothing, Made to Last</title>
+<title>Ravelo 1986 — Premium Clothing, Made to Last</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400;1,9..144,500&family=Work+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
   :root{
-    --ink:#211d17;
-    --parchment:#efe8d8;
-    --parchment-2:#e6dcc4;
-    --hunter:#28402f;
-    --hunter-dark:#1b2b21;
-    --oxblood:#732c2c;
-    --brass:#a5813a;
-    --off-white:#faf7ee;
-    --line:rgba(33,29,23,0.22);
-    --stitch: repeating-linear-gradient(90deg, var(--ink) 0 6px, transparent 6px 12px);
+    --navy: #0f1a2e;
+    --navy-light: #1a2d4d;
+    --navy-accent: #1e3a5f;
+    --gold: #d4af37;
+    --gold-light: #e5c158;
+    --white: #f5f7fa;
+    --light-gray: #e8ecf1;
+    --text: #0f1a2e;
+    --line: rgba(15, 26, 46, 0.15);
     --ease: cubic-bezier(0.22, 1, 0.36, 1);
   }
 
@@ -26,8 +25,8 @@
   html{scroll-behavior:smooth;}
   body{
     margin:0;
-    background:var(--parchment);
-    color:var(--ink);
+    background: linear-gradient(135deg, #f5f7fa 0%, #e8ecf1 100%);
+    color:var(--text);
     font-family:'Work Sans', sans-serif;
     -webkit-font-smoothing:antialiased;
   }
@@ -38,7 +37,7 @@
     inset:0;
     pointer-events:none;
     z-index:2000;
-    opacity:0.035;
+    opacity:0.025;
     background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
     mix-blend-mode:multiply;
   }
@@ -57,19 +56,19 @@
     font-size:12px;
     letter-spacing:0.14em;
     text-transform:uppercase;
-    color:var(--hunter);
+    color:var(--gold);
   }
 
   .stitch-rule{
     height:2px;
-    background:var(--stitch);
+    background:linear-gradient(90deg, var(--gold) 0 6px, transparent 6px 12px);
     background-size:12px 2px;
     opacity:0;
     transform:scaleX(0);
     transform-origin:left;
     transition:transform 0.9s var(--ease), opacity 0.4s ease;
   }
-  .stitch-rule.in-view{opacity:0.45; transform:scaleX(1);}
+  .stitch-rule.in-view{opacity:0.8; transform:scaleX(1);}
 
   .reveal{
     opacity:0;
@@ -77,12 +76,14 @@
     transition:opacity 0.8s var(--ease), transform 0.8s var(--ease);
   }
   .reveal.in-view{opacity:1; transform:translateY(0);}
+  
   .reveal-stagger > *{
     opacity:0;
-    transform:translateY(24px);
+    transform:translateY(24px) rotateX(8deg);
     transition:opacity 0.7s var(--ease), transform 0.7s var(--ease);
+    perspective:1000px;
   }
-  .reveal-stagger.in-view > *{opacity:1; transform:translateY(0);}
+  .reveal-stagger.in-view > *{opacity:1; transform:translateY(0) rotateX(0);}
   .reveal-stagger.in-view > *:nth-child(1){transition-delay:0.02s;}
   .reveal-stagger.in-view > *:nth-child(2){transition-delay:0.1s;}
   .reveal-stagger.in-view > *:nth-child(3){transition-delay:0.18s;}
@@ -109,14 +110,14 @@
   /* NAV */
   header{
     position:sticky; top:0; z-index:100;
-    background:rgba(239,232,216,0.92);
-    backdrop-filter:blur(6px);
-    border-bottom:1px solid transparent;
+    background:rgba(15, 26, 46, 0.95);
+    backdrop-filter:blur(10px);
+    border-bottom:1px solid var(--line);
     transition:border-color 0.4s var(--ease), box-shadow 0.4s var(--ease);
   }
   header.is-scrolled{
-    border-bottom-color:var(--line);
-    box-shadow:0 8px 24px -18px rgba(33,29,23,0.35);
+    border-bottom-color:var(--gold);
+    box-shadow:0 8px 32px -12px rgba(15, 26, 46, 0.4);
   }
   nav.wrap{
     display:flex; align-items:center; justify-content:space-between;
@@ -127,6 +128,7 @@
     font-size:20px;
     font-weight:600;
     letter-spacing:0.01em;
+    color:var(--white);
   }
   .wordmark small{
     display:block;
@@ -134,13 +136,14 @@
     font-size:10px;
     letter-spacing:0.2em;
     font-weight:400;
-    color:var(--oxblood);
+    color:var(--gold);
     margin-top:2px;
   }
   .nav-links{
     display:flex; gap:36px;
     list-style:none; margin:0; padding:0;
     font-size:14px;
+    color:var(--white);
   }
   .nav-links a{
     text-decoration:none;
@@ -150,7 +153,7 @@
   .nav-links a::after{
     content:"";
     position:absolute; left:0; right:0; bottom:0;
-    height:1px; background:var(--ink);
+    height:2px; background:var(--gold);
     transform:scaleX(0); transform-origin:left;
     transition:transform 0.25s ease;
   }
@@ -160,20 +163,39 @@
     font-size:12px;
     letter-spacing:0.08em;
     text-transform:uppercase;
-    border:1px solid var(--ink);
+    border:1px solid var(--gold);
     padding:9px 16px;
     text-decoration:none;
+    color:var(--gold);
+    transition:background 0.25s var(--ease), color 0.25s var(--ease), transform 0.25s var(--ease);
   }
-  .nav-cta{transition:background 0.25s var(--ease), color 0.25s var(--ease), transform 0.25s var(--ease);}
-  .nav-cta:hover{background:var(--ink); color:var(--parchment); transform:translateY(-2px);}
+  .nav-cta:hover{background:var(--gold); color:var(--navy); transform:translateY(-2px);}
   @media (max-width:800px){ .nav-links{display:none;} }
 
   /* HERO */
   .hero{
     position:relative;
     padding:96px 0 120px;
-    overflow:visible;
+    overflow:hidden;
+    background:linear-gradient(135deg, var(--navy) 0%, var(--navy-light) 100%);
   }
+
+  .hero::before{
+    content:"";
+    position:absolute;
+    top:-50%;
+    right:-20%;
+    width:600px;
+    height:600px;
+    background:radial-gradient(circle, rgba(212, 175, 55, 0.1) 0%, transparent 70%);
+    animation:float 20s ease-in-out infinite;
+  }
+
+  @keyframes float{
+    0%, 100%{transform:translateY(0px) rotate(0deg);}
+    50%{transform:translateY(-30px) rotate(10deg);}
+  }
+
   @keyframes rise-in{
     from{opacity:0; transform:translateY(22px);}
     to{opacity:1; transform:translateY(0);}
@@ -192,32 +214,36 @@
   .hero-in[data-d="3"]{animation-delay:0.36s;}
   .hero-in[data-d="4"]{animation-delay:0.5s;}
   .hero-in[data-d="5"]{animation-delay:0.65s;}
+  
   .hero .wrap{
     position:relative;
     display:grid;
     grid-template-columns:1.4fr 0.9fr;
     gap:48px;
     align-items:end;
+    z-index:10;
   }
   .hero h1{
     font-size:clamp(48px, 7vw, 92px);
     line-height:0.98;
+    color:var(--white);
   }
   .hero h1 em{
     font-style:italic;
-    color:var(--oxblood);
+    color:var(--gold);
   }
   .hero p.sub{
     max-width:44ch;
     margin:28px 0 36px;
     font-size:18px;
     line-height:1.55;
-    color:var(--ink);
+    color:var(--white);
+    opacity:0.9;
   }
   .hero-actions{display:flex; gap:16px; align-items:center;}
   .btn-primary{
-    background:var(--hunter);
-    color:var(--off-white);
+    background:var(--gold);
+    color:var(--navy);
     text-decoration:none;
     font-family:'IBM Plex Mono', monospace;
     font-size:13px;
@@ -225,12 +251,13 @@
     text-transform:uppercase;
     padding:15px 26px;
     display:inline-block;
+    font-weight:600;
     transition:background 0.25s var(--ease), transform 0.25s var(--ease), box-shadow 0.25s var(--ease);
   }
   .btn-primary:hover{
-    background:var(--hunter-dark);
-    transform:translateY(-2px);
-    box-shadow:0 10px 20px -10px rgba(27,43,33,0.6);
+    background:var(--gold-light);
+    transform:translateY(-3px);
+    box-shadow:0 12px 28px -8px rgba(212, 175, 55, 0.5);
   }
   .btn-ghost{
     font-family:'IBM Plex Mono', monospace;
@@ -239,26 +266,27 @@
     text-transform:uppercase;
     text-decoration:underline;
     text-underline-offset:4px;
+    color:var(--white);
   }
 
-  /* HANGTAG — signature element */
+  /* HANGTAG */
   .hangtag{
     justify-self:end;
     width:220px;
-    background:var(--off-white);
-    border:1px solid var(--ink);
+    background:var(--white);
+    border:2px solid var(--gold);
     padding:22px 20px 26px;
     position:relative;
     transform-origin:top center;
     opacity:0;
     animation:tag-drop 1s var(--ease) forwards, tag-sway 6s ease-in-out infinite;
     animation-delay:0.4s, 1.4s;
-    box-shadow:6px 8px 0 rgba(33,29,23,0.08);
+    box-shadow:0 20px 60px -10px rgba(15, 26, 46, 0.3);
     transition:box-shadow 0.3s var(--ease), transform 0.3s var(--ease);
   }
   .hangtag:hover{
     animation-play-state:running, paused;
-    box-shadow:9px 12px 0 rgba(33,29,23,0.12);
+    box-shadow:0 30px 80px -10px rgba(212, 175, 55, 0.4);
   }
   @keyframes tag-sway{
     0%, 100%{transform:rotate(4deg);}
@@ -270,23 +298,23 @@
     top:-1px; left:50%;
     width:16px; height:16px;
     transform:translate(-50%,-50%);
-    background:var(--parchment);
-    border:1px solid var(--ink);
+    background:var(--light-gray);
+    border:2px solid var(--gold);
     border-radius:50%;
   }
   .hangtag::after{
     content:"";
     position:absolute;
     top:-30px; left:50%;
-    width:1px; height:30px;
-    background:var(--ink);
+    width:2px; height:30px;
+    background:var(--gold);
   }
   .hangtag .tag-eyebrow{
     font-family:'IBM Plex Mono', monospace;
     font-size:10px;
     letter-spacing:0.16em;
     text-transform:uppercase;
-    color:var(--oxblood);
+    color:var(--gold);
     display:block;
     margin-bottom:10px;
   }
@@ -295,6 +323,7 @@
     font-size:26px;
     line-height:1.1;
     margin-bottom:14px;
+    color:var(--navy);
   }
   .hangtag .tag-rule{
     height:1px; background:var(--line); margin:14px 0;
@@ -303,12 +332,12 @@
     font-family:'IBM Plex Mono', monospace;
     font-size:10.5px;
     line-height:1.8;
-    color:var(--ink);
+    color:var(--text);
     opacity:0.75;
   }
 
   /* SECTION generic */
-  section{padding:88px 0;}
+  section{padding:88px 0; position:relative;}
   .section-head{
     display:flex;
     justify-content:space-between;
@@ -317,36 +346,60 @@
     margin-bottom:52px;
     flex-wrap:wrap;
   }
-  .section-head h2{font-size:clamp(30px,4vw,44px);}
+  .section-head h2{
+    font-size:clamp(30px,4vw,44px);
+    color:var(--navy);
+  }
   .section-head p{
     max-width:38ch;
     font-size:15px;
     line-height:1.6;
-    color:var(--ink);
+    color:var(--text);
     opacity:0.8;
     margin:0;
   }
 
   /* HERITAGE */
-  .heritage{background:var(--off-white); border-top:1px solid var(--line); border-bottom:1px solid var(--line);}
+  .heritage{background:var(--white); border-top:3px solid var(--gold); border-bottom:3px solid var(--gold);}
   .heritage .wrap{
     display:grid;
     grid-template-columns:0.8fr 1.2fr;
     gap:64px;
   }
   .heritage-figure{
-    border:1px solid var(--ink);
+    border:2px solid var(--navy);
     aspect-ratio:3/4;
-    background:
-      linear-gradient(180deg, transparent 0%, transparent 92%, var(--hunter) 92%, var(--hunter) 100%),
-      repeating-linear-gradient(135deg, var(--parchment-2) 0 18px, var(--parchment) 18px 36px);
+    background:linear-gradient(135deg, var(--navy) 0%, var(--navy-light) 100%);
     position:relative;
+    overflow:hidden;
+    transition:transform 0.6s var(--ease);
+  }
+  .heritage-figure img{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    transition:transform 0.6s var(--ease);
+  }
+  .heritage-figure.in-view{
+    animation:scaleIn 0.8s var(--ease) forwards;
+  }
+  .heritage-figure.in-view img{
+    animation:zoomIn 8s ease-in-out infinite;
+  }
+  @keyframes scaleIn{
+    from{transform:scale(0.95) rotateY(-10deg);}
+    to{transform:scale(1) rotateY(0);}
+  }
+  @keyframes zoomIn{
+    0%, 100%{transform:scale(1) rotate(0deg);}
+    50%{transform:scale(1.05) rotate(1deg);}
   }
   .heritage-figure span{
     position:absolute; bottom:14px; left:14px;
     font-family:'IBM Plex Mono', monospace;
     font-size:10px; letter-spacing:0.1em; text-transform:uppercase;
-    color:var(--off-white);
+    color:var(--gold);
+    z-index:10;
   }
   .heritage-copy p{
     font-size:16.5px;
@@ -354,33 +407,50 @@
     margin:0 0 20px;
     max-width:56ch;
   }
-  .heritage-copy p:first-of-type{font-size:19px; font-family:'Fraunces', serif; font-weight:400;}
+  .heritage-copy p:first-of-type{font-size:19px; font-family:'Fraunces', serif; font-weight:400; color:var(--navy);}
 
   /* COLLECTION */
+  .collection{background:linear-gradient(135deg, #f5f7fa 0%, #e8ecf1 100%);}
+  
   .grid-4{
     display:grid;
     grid-template-columns:repeat(4, 1fr);
-    gap:1px;
-    background:var(--line);
-    border:1px solid var(--line);
+    gap:24px;
+    background:transparent;
+    border:none;
   }
   .piece{
-    background:var(--parchment);
-    padding:26px 22px 24px;
+    background:var(--white);
+    padding:0;
     display:flex;
     flex-direction:column;
-    gap:14px;
-    transition:background 0.35s var(--ease), transform 0.35s var(--ease);
+    gap:0;
+    transition:all 0.35s var(--ease);
+    border:1px solid var(--line);
+    box-shadow:0 4px 12px -4px rgba(15, 26, 46, 0.1);
+    overflow:hidden;
   }
   .piece:hover{
-    background:var(--off-white);
-    transform:translateY(-6px);
+    background:var(--white);
+    transform:translateY(-8px) scale(1.02);
+    box-shadow:0 16px 40px -8px rgba(212, 175, 55, 0.3);
+    border-color:var(--gold);
   }
   .piece-swatch{
-    aspect-ratio:1/1.15;
-    border:1px solid var(--ink);
+    aspect-ratio:1/1.2;
+    border:none;
     overflow:hidden;
     position:relative;
+    background:#e0e0e0;
+  }
+  .piece-swatch img{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    transition:transform 0.6s var(--ease);
+  }
+  .piece:hover .piece-swatch img{
+    transform:scale(1.1) rotate(2deg);
   }
   .piece-swatch::after{
     content:"";
@@ -388,53 +458,97 @@
     background:inherit;
     transition:transform 0.6s var(--ease);
   }
-  .piece:hover .piece-swatch::after{transform:scale(1.12) rotate(1deg);}
-  .piece-name{transition:color 0.3s ease;}
-  .piece:hover .piece-name{color:var(--oxblood);}
-  .swatch-1{background:repeating-linear-gradient(90deg, #f4efe1 0 6px, #dcd2b3 6px 12px);}
-  .swatch-2{background:linear-gradient(180deg, var(--hunter) 0%, var(--hunter-dark) 100%);}
-  .swatch-3{background:repeating-linear-gradient(45deg, #ece3cc 0 4px, #c9bd97 4px 8px);}
-  .swatch-4{background:var(--oxblood);}
-  .piece-name{font-family:'Fraunces', serif; font-size:18px;}
+  .piece-info{
+    padding:20px 16px;
+  }
+  .piece-name{
+    font-family:'Fraunces', serif; 
+    font-size:18px;
+    color:var(--navy);
+    margin-bottom:8px;
+    transition:color 0.3s ease;
+  }
+  .piece:hover .piece-name{
+    color:var(--gold);
+  }
   .piece-meta{
     display:flex; justify-content:space-between; align-items:baseline;
     font-family:'IBM Plex Mono', monospace;
     font-size:12px;
-    color:var(--ink);
-    opacity:0.75;
+    color:var(--text);
+    opacity:0.7;
+  }
+  .piece-meta span:last-child{
+    color:var(--gold);
+    font-weight:600;
+    font-size:14px;
   }
   @media (max-width:900px){ .grid-4{grid-template-columns:repeat(2,1fr);} }
 
   /* DETAILS / craft */
-  .craft{background:var(--hunter-dark); color:var(--parchment);}
-  .craft .section-head p{color:var(--parchment); opacity:0.75;}
-  .craft .eyebrow{color:var(--brass);}
+  .craft{
+    background:linear-gradient(135deg, var(--navy) 0%, var(--navy-light) 100%);
+    color:var(--white);
+    position:relative;
+    overflow:hidden;
+  }
+
+  .craft::before{
+    content:"";
+    position:absolute;
+    top:50%;
+    left:-30%;
+    width:800px;
+    height:800px;
+    background:radial-gradient(circle, rgba(212, 175, 55, 0.08) 0%, transparent 70%);
+  }
+
+  .craft .section-head h2{color:var(--white);}
+  .craft .section-head p{color:var(--white); opacity:0.85;}
+  .craft .eyebrow{color:var(--gold);}
+  
   .craft-grid{
     display:grid;
     grid-template-columns:repeat(3, 1fr);
     gap:48px;
+    position:relative;
+    z-index:10;
   }
-  .craft-item{transition:transform 0.4s var(--ease);}
-  .craft-item:hover{transform:translateY(-4px);}
+  .craft-item{
+    transition:transform 0.4s var(--ease), box-shadow 0.4s var(--ease);
+    padding:32px;
+    background:rgba(255, 255, 255, 0.05);
+    border:1px solid rgba(212, 175, 55, 0.3);
+    backdrop-filter:blur(10px);
+  }
+  .craft-item:hover{
+    transform:translateY(-6px) rotateY(5deg);
+    box-shadow:0 20px 50px -10px rgba(212, 175, 55, 0.4);
+    background:rgba(255, 255, 255, 0.1);
+    border-color:var(--gold);
+  }
   .craft-item .num{
     font-family:'IBM Plex Mono', monospace;
     font-size:12px;
-    color:var(--brass);
+    color:var(--gold);
     letter-spacing:0.1em;
     display:inline-block;
     transition:transform 0.4s var(--ease), color 0.4s ease;
   }
-  .craft-item:hover .num{transform:translateX(4px); color:var(--parchment);}
+  .craft-item:hover .num{
+    transform:translateX(6px);
+    color:var(--gold-light);
+  }
   .craft-item h3{
     font-size:22px;
-    color:var(--parchment);
+    color:var(--white);
     margin:14px 0 12px;
   }
   .craft-item p{
     font-size:14.5px;
     line-height:1.7;
-    color:var(--parchment);
-    opacity:0.72;
+    color:var(--white);
+    opacity:0.8;
     margin:0;
   }
   @media (max-width:800px){ .craft-grid{grid-template-columns:1fr; row-gap:36px;} }
@@ -443,11 +557,14 @@
   .cta-band{
     text-align:center;
     padding:100px 0;
+    background:var(--white);
+    border-top:3px solid var(--gold);
   }
   .cta-band h2{
     font-size:clamp(32px,5vw,54px);
     max-width:16ch;
     margin:0 auto 20px;
+    color:var(--navy);
   }
   .cta-band form{
     display:flex;
@@ -455,10 +572,10 @@
     gap:0;
     max-width:420px;
     margin:36px auto 0;
-    border:1px solid var(--ink);
+    border:2px solid var(--gold);
   }
   .cta-band form{transition:box-shadow 0.3s var(--ease);}
-  .cta-band form:focus-within{box-shadow:0 0 0 3px rgba(40,64,47,0.15);}
+  .cta-band form:focus-within{box-shadow:0 0 0 4px rgba(212, 175, 55, 0.2);}
   .cta-band input{
     flex:1;
     border:none;
@@ -466,28 +583,31 @@
     padding:15px 16px;
     font-family:'Work Sans', sans-serif;
     font-size:14px;
-    color:var(--ink);
+    color:var(--navy);
     outline:none;
   }
   .cta-band button{
     border:none;
-    border-left:1px solid var(--ink);
-    background:var(--ink);
-    color:var(--parchment);
+    border-left:2px solid var(--gold);
+    background:var(--gold);
+    color:var(--navy);
     padding:0 22px;
     font-family:'IBM Plex Mono', monospace;
     font-size:12px;
     letter-spacing:0.08em;
     text-transform:uppercase;
     cursor:pointer;
+    font-weight:600;
     transition:background 0.25s ease, letter-spacing 0.25s ease;
   }
-  .cta-band button:hover{background:var(--hunter); letter-spacing:0.12em;}
+  .cta-band button:hover{background:var(--gold-light); letter-spacing:0.12em;}
 
   /* FOOTER */
   footer{
-    border-top:1px solid var(--line);
+    border-top:3px solid var(--gold);
     padding:48px 0 40px;
+    background:var(--navy);
+    color:var(--white);
   }
   footer .wrap{
     display:flex;
@@ -496,19 +616,19 @@
     gap:24px;
     font-family:'IBM Plex Mono', monospace;
     font-size:12px;
-    color:var(--ink);
-    opacity:0.7;
+    color:var(--white);
+    opacity:0.8;
   }
   footer .foot-links{display:flex; gap:24px; list-style:none; padding:0; margin:0;}
-  footer .foot-links a{text-decoration:none;}
-  footer .foot-links a:hover{text-decoration:underline;}
+  footer .foot-links a{text-decoration:none; transition:color 0.25s ease;}
+  footer .foot-links a:hover{color:var(--gold);}
 </style>
 </head>
 <body>
 
 <header>
   <nav class="wrap">
-    <div class="wordmark">RAVELO<small>1986 &middot; CLASSIC CLOTHING</small></div>
+    <div class="wordmark">RAVELO<small>1986 &middot; PREMIUM CLOTHING</small></div>
     <ul class="nav-links">
       <li><a href="#collection">Collection</a></li>
       <li><a href="#heritage">Heritage</a></li>
@@ -522,22 +642,22 @@
 <section class="hero">
   <div class="wrap">
     <div>
-      <span class="eyebrow hero-in" data-d="1">Est. 1986 &nbsp;/&nbsp; Made to outlast the season</span>
-      <h1 class="hero-in" data-d="2" style="margin-top:18px;">Tailored for<br>the <em>long run.</em></h1>
-      <p class="sub hero-in" data-d="3">Ravelo 1986 makes classic clothing the old way: heavy cottons, natural fibers, and cuts that don't chase trends. Nothing here was designed to be replaced next year.</p>
+      <span class="eyebrow hero-in" data-d="1">Est. 1986 &nbsp;/&nbsp; Luxury Crafted for Life</span>
+      <h1 class="hero-in" data-d="2" style="margin-top:18px;">Premium<br>Elegance, <em>Timeless</em></h1>
+      <p class="sub hero-in" data-d="3">Ravelo 1986 crafts luxury clothing the artisan way: finest materials, impeccable construction, and designs that transcend trends. Every piece is an investment in timeless style.</p>
       <div class="hero-actions hero-in" data-d="4">
-        <a class="btn-primary" href="#collection">View the collection</a>
-        <a class="btn-ghost" href="#heritage">Our story</a>
+        <a class="btn-primary" href="#collection">Explore Collection</a>
+        <a class="btn-ghost" href="#heritage">Our Legacy</a>
       </div>
     </div>
     <div class="hangtag">
-      <span class="tag-eyebrow">Genuine Article</span>
+      <span class="tag-eyebrow">Premium Edition</span>
       <div class="tag-brand">Ravelo<br>1986</div>
       <div class="tag-rule"></div>
       <div class="tag-meta">
-        100% NATURAL FIBER<br>
-        MADE TO MEASURE<br>
-        NO. 0186 &mdash; WINTERTHUR
+        FINEST MATERIALS<br>
+        ARTISAN CRAFTED<br>
+        EDITION 2026 — ZURICH
       </div>
     </div>
   </div>
@@ -547,46 +667,83 @@
 
 <section class="heritage" id="heritage">
   <div class="wrap">
-    <div class="heritage-figure reveal"><span>Ravelo &mdash; Archive, 1986&ndash;present</span></div>
+    <div class="heritage-figure reveal">
+      <img src="https://images.unsplash.com/photo-1551543221-5537ce7b6ea8?w=500&h=700&fit=crop" alt="Ravelo Archive">
+      <span>Ravelo — Archive, 1986–present</span>
+    </div>
     <div class="heritage-copy reveal">
-      <span class="eyebrow">Heritage</span>
-      <p style="margin-top:18px;">We started with one shirt pattern and a stubborn idea: clothes should be built, not manufactured.</p>
-      <p>Since 1986, Ravelo has kept to the same principles &mdash; oxford cloth that softens with age, buttons sewn to stay, seams that hold up to actual wear. The silhouettes borrow from the field, the stable, and the university common room: unfussy, generous in the right places, cut to move.</p>
-      <p>We don't chase seasons. Most of what we make today was already correct forty years ago, and we expect it to still be correct forty years from now.</p>
+      <span class="eyebrow">Legacy</span>
+      <p style="margin-top:18px;">We started with an unwavering vision: luxury clothing built to become family heirlooms.</p>
+      <p>Since 1986, Ravelo has maintained the highest standards — premium fabrics that age like fine wine, meticulous hand-stitching, construction techniques that endure decades. Our silhouettes draw from classic tailoring, refined sportswear, and heritage menswear traditions.</p>
+      <p>We don't follow trends. Every piece we create today was designed to be worn and treasured for a lifetime, passed down to generations who will appreciate its uncompromising quality.</p>
     </div>
   </div>
 </section>
 
 <div class="stitch-rule"></div>
 
-<section id="collection">
+<section class="collection" id="collection">
   <div class="wrap">
     <div class="section-head reveal">
       <h2>The Collection</h2>
-      <p class="eyebrow" style="opacity:1;">Six pieces, built to be worn on rotation for years, not seasons.</p>
+      <p class="eyebrow" style="opacity:1;">Six masterpieces, each crafted with obsessive attention to detail.</p>
     </div>
   </div>
   <div class="wrap" style="padding:0 32px;">
     <div class="grid-4 reveal-stagger">
       <div class="piece">
-        <div class="piece-swatch swatch-1"></div>
-        <div class="piece-name">Oxford Cloth Shirt</div>
-        <div class="piece-meta"><span>No. 01</span><span>CHF 140</span></div>
+        <div class="piece-swatch">
+          <img src="https://images.unsplash.com/photo-1596362866898-e76344ad827b?w=400&h=500&fit=crop" alt="Oxford Cloth Shirt">
+        </div>
+        <div class="piece-info">
+          <div class="piece-name">Oxford Cloth Shirt</div>
+          <div class="piece-meta"><span>No. 01</span><span>CHF 240</span></div>
+        </div>
       </div>
       <div class="piece">
-        <div class="piece-swatch swatch-2"></div>
-        <div class="piece-name">Shetland Crewneck</div>
-        <div class="piece-meta"><span>No. 02</span><span>CHF 190</span></div>
+        <div class="piece-swatch">
+          <img src="https://images.unsplash.com/photo-1620799140408-edc6dcad937d?w=400&h=500&fit=crop" alt="Shetland Crewneck">
+        </div>
+        <div class="piece-info">
+          <div class="piece-name">Shetland Crewneck</div>
+          <div class="piece-meta"><span>No. 02</span><span>CHF 280</span></div>
+        </div>
       </div>
       <div class="piece">
-        <div class="piece-swatch swatch-3"></div>
-        <div class="piece-name">Chino Trouser</div>
-        <div class="piece-meta"><span>No. 03</span><span>CHF 160</span></div>
+        <div class="piece-swatch">
+          <img src="https://images.unsplash.com/photo-1473999505740-32667f3b3d99?w=400&h=500&fit=crop" alt="Chino Trouser">
+        </div>
+        <div class="piece-info">
+          <div class="piece-name">Chino Trouser</div>
+          <div class="piece-meta"><span>No. 03</span><span>CHF 220</span></div>
+        </div>
       </div>
       <div class="piece">
-        <div class="piece-swatch swatch-4"></div>
-        <div class="piece-name">Field Jacket</div>
-        <div class="piece-meta"><span>No. 04</span><span>CHF 380</span></div>
+        <div class="piece-swatch">
+          <img src="https://images.unsplash.com/photo-1539533057671-91b2d52bd4ad?w=400&h=500&fit=crop" alt="Field Jacket">
+        </div>
+        <div class="piece-info">
+          <div class="piece-name">Field Jacket</div>
+          <div class="piece-meta"><span>No. 04</span><span>CHF 420</span></div>
+        </div>
+      </div>
+      <div class="piece">
+        <div class="piece-swatch">
+          <img src="https://images.unsplash.com/photo-1594938298603-c8148c4dae35?w=400&h=500&fit=crop" alt="Wool Blazer">
+        </div>
+        <div class="piece-info">
+          <div class="piece-name">Wool Blazer</div>
+          <div class="piece-meta"><span>No. 05</span><span>CHF 520</span></div>
+        </div>
+      </div>
+      <div class="piece">
+        <div class="piece-swatch">
+          <img src="https://images.unsplash.com/photo-1598033129519-d78de7f89f54?w=400&h=500&fit=crop" alt="Leather Belt">
+        </div>
+        <div class="piece-info">
+          <div class="piece-name">Leather Belt</div>
+          <div class="piece-meta"><span>No. 06</span><span>CHF 180</span></div>
+        </div>
       </div>
     </div>
   </div>
@@ -595,27 +752,27 @@
 <section class="craft" id="craft">
   <div class="wrap">
     <div class="section-head">
-      <span class="eyebrow">Craft</span>
+      <span class="eyebrow">Craftsmanship</span>
     </div>
     <div class="section-head" style="margin-top:-32px;">
-      <h2>Built the slow way.</h2>
-      <p>Three decisions we don't compromise on, no matter what it costs us in speed.</p>
+      <h2>Built for Eternity.</h2>
+      <p>Three uncompromising principles that define every Ravelo creation.</p>
     </div>
     <div class="craft-grid reveal-stagger">
       <div class="craft-item">
         <div class="num">01</div>
-        <h3>Natural fiber, always</h3>
-        <p>Long-staple cotton, Shetland wool, waxed canvas. No synthetic blends looking to cut costs at the expense of how a garment ages.</p>
+        <h3>Premium Materials</h3>
+        <p>Italian cotton, Scottish wool, Japanese denim. We source the finest fabrics globally, each selected for durability and the way they improve with age.</p>
       </div>
       <div class="craft-item">
         <div class="num">02</div>
-        <h3>Cut for movement</h3>
-        <p>Patterns drafted with room in the shoulder and a true waist, so a jacket still fits the way you actually stand and reach.</p>
+        <h3>Precision Tailoring</h3>
+        <p>Every seam reinforced, every button reinforced with cross-stitching. Our cuts respect the body's natural lines, combining luxury and comfort seamlessly.</p>
       </div>
       <div class="craft-item">
         <div class="num">03</div>
-        <h3>Stitched to be repaired</h3>
-        <p>Reinforced seams and spare buttons sewn into every hem, because a piece worth keeping is a piece worth mending.</p>
+        <h3>Heritage Techniques</h3>
+        <p>Hand-finished details, double-stitched seams, reinforced hems. Built to last generations, not just seasons. Every piece is a wearable investment.</p>
       </div>
     </div>
   </div>
@@ -623,18 +780,18 @@
 
 <section class="cta-band" id="contact">
   <div class="wrap reveal">
-    <span class="eyebrow">Stay in the loop</span>
-    <h2 style="margin-top:18px;">New arrivals, twice a year. Nothing else.</h2>
-    <form onsubmit="event.preventDefault(); this.querySelector('button').textContent='Signed up';">
-      <input type="email" placeholder="you@email.com" required>
-      <button type="submit">Sign up</button>
+    <span class="eyebrow">Join the Circle</span>
+    <h2 style="margin-top:18px;">Exclusive releases, early access, member-only events.</h2>
+    <form onsubmit="event.preventDefault(); this.querySelector('button').textContent='Welcome to Ravelo';">
+      <input type="email" placeholder="your@email.com" required>
+      <button type="submit">Subscribe</button>
     </form>
   </div>
 </section>
 
 <footer>
   <div class="wrap">
-    <span>&copy; 1986&ndash;2026 Ravelo. Winterthur, Switzerland.</span>
+    <span>&copy; 1986–2026 Ravelo. Zurich, Switzerland.</span>
     <ul class="foot-links">
       <li><a href="#collection">Collection</a></li>
       <li><a href="#heritage">Heritage</a></li>
@@ -644,14 +801,14 @@
 </footer>
 
 <script>
-  // Header gains a hairline + shadow once the page scrolls
+  // Header gains a line + shadow once the page scrolls
   const header = document.querySelector('header');
   const onScroll = () => header.classList.toggle('is-scrolled', window.scrollY > 8);
   onScroll();
   window.addEventListener('scroll', onScroll, { passive: true });
 
-  // Scroll-triggered reveals for sections, staggered grids, and stitch rules
-  const revealTargets = document.querySelectorAll('.reveal, .reveal-stagger, .stitch-rule');
+  // Scroll-triggered reveals with 3D transforms
+  const revealTargets = document.querySelectorAll('.reveal, .reveal-stagger, .stitch-rule, .heritage-figure');
   const io = new IntersectionObserver((entries) => {
     entries.forEach((entry) => {
       if (entry.isIntersecting) {
@@ -661,7 +818,17 @@
     });
   }, { threshold: 0.15, rootMargin: '0px 0px -40px 0px' });
   revealTargets.forEach((el) => io.observe(el));
+
+  // Parallax effect on scroll
+  document.addEventListener('scroll', () => {
+    const scrolled = window.scrollY;
+    const parallaxElements = document.querySelectorAll('.hero::before, .craft::before');
+    parallaxElements.forEach((el, idx) => {
+      if (idx === 0) {
+        document.querySelector('.hero::before').style.transform = `translateY(${scrolled * 0.3}px) rotate(${scrolled * 0.1}deg)`;
+      }
+    });
+  }, { passive: true });
 </script>
 </body>
 </html>
-</message_continuation>
