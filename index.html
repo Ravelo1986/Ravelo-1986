@@ -86,7 +86,6 @@
     transform:translateY(24px) rotateX(15deg);
     transition:opacity 0.7s var(--ease), transform 0.7s var(--ease);
     perspective:1000px;
-    will-change:transform, opacity;
   }
   .reveal-stagger.in-view > *{opacity:1; transform:translateY(0) rotateX(0);}
   .reveal-stagger.in-view > *:nth-child(1){transition-delay:0.02s;}
@@ -194,7 +193,6 @@
     height:600px;
     background:radial-gradient(circle, rgba(212, 175, 55, 0.1) 0%, transparent 70%);
     animation:float 20s ease-in-out infinite;
-    will-change:transform;
   }
 
   @keyframes float{
@@ -289,7 +287,6 @@
     animation-delay:0.4s, 1.4s;
     box-shadow:0 20px 60px -10px rgba(15, 26, 46, 0.3);
     transition:box-shadow 0.3s var(--ease), transform 0.3s var(--ease);
-    will-change:transform;
   }
   .hangtag:hover{
     animation-play-state:running, paused;
@@ -379,30 +376,18 @@
     background:linear-gradient(135deg, var(--navy) 0%, var(--navy-light) 100%);
     position:relative;
     overflow:hidden;
-    transition:transform 0.6s var(--ease);
-    perspective:1000px;
-    will-change:transform;
   }
   .heritage-figure img{
     width:100%;
     height:100%;
     object-fit:cover;
-    transition:transform 0.6s var(--ease);
-    will-change:transform;
   }
   .heritage-figure.in-view{
     animation:scaleIn 0.8s var(--ease) forwards;
   }
-  .heritage-figure.in-view img{
-    animation:zoomIn 8s ease-in-out infinite;
-  }
   @keyframes scaleIn{
     from{transform:scale(0.95) rotateY(-15deg);}
     to{transform:scale(1) rotateY(0deg);}
-  }
-  @keyframes zoomIn{
-    0%, 100%{transform:scale(1) rotate(0deg);}
-    50%{transform:scale(1.05) rotate(1.5deg);}
   }
   .heritage-figure span{
     position:absolute; bottom:14px; left:14px;
@@ -439,13 +424,12 @@
     border:1px solid var(--line);
     box-shadow:0 4px 12px -4px rgba(15, 26, 46, 0.1);
     overflow:hidden;
-    perspective:1000px;
-    will-change:transform;
+    perspective:1200px;
   }
   .piece:hover{
     background:var(--white);
-    transform:translateY(-8px) scale(1.02) rotateY(2deg);
-    box-shadow:0 16px 40px -8px rgba(212, 175, 55, 0.3);
+    transform:translateY(-12px) scale(1.03) rotateY(3deg);
+    box-shadow:0 20px 50px -8px rgba(212, 175, 55, 0.4);
     border-color:var(--gold);
   }
   .piece-swatch{
@@ -454,23 +438,21 @@
     overflow:hidden;
     position:relative;
     background:#e0e0e0;
-    perspective:1000px;
+    perspective:1200px;
   }
   .piece-swatch img{
     width:100%;
     height:100%;
     object-fit:cover;
     transition:transform 0.6s var(--ease);
-    will-change:transform;
   }
   .piece:hover .piece-swatch img{
-    transform:scale(1.1) rotate(3deg) rotateY(5deg);
+    transform:scale(1.15) rotateY(8deg);
   }
   .piece-swatch::after{
     content:"";
     position:absolute; inset:0;
     background:inherit;
-    transition:transform 0.6s var(--ease);
   }
   .piece-info{
     padding:20px 16px;
@@ -515,7 +497,6 @@
     width:800px;
     height:800px;
     background:radial-gradient(circle, rgba(212, 175, 55, 0.08) 0%, transparent 70%);
-    will-change:transform;
   }
 
   .craft .section-head h2{color:var(--white);}
@@ -535,11 +516,10 @@
     background:rgba(255, 255, 255, 0.05);
     border:1px solid rgba(212, 175, 55, 0.3);
     backdrop-filter:blur(10px);
-    perspective:1000px;
-    will-change:transform;
+    perspective:1200px;
   }
   .craft-item:hover{
-    transform:translateY(-6px) rotateY(8deg) rotateX(5deg);
+    transform:translateY(-10px) rotateX(8deg) rotateY(6deg) scale(1.02);
     box-shadow:0 20px 50px -10px rgba(212, 175, 55, 0.4);
     background:rgba(255, 255, 255, 0.1);
     border-color:var(--gold);
@@ -553,7 +533,7 @@
     transition:transform 0.4s var(--ease), color 0.4s ease;
   }
   .craft-item:hover .num{
-    transform:translateX(6px);
+    transform:translateX(8px);
     color:var(--gold-light);
   }
   .craft-item h3{
@@ -824,7 +804,7 @@
   onScroll();
   window.addEventListener('scroll', onScroll, { passive: true });
 
-  // Scroll-triggered reveals with 3D transforms
+  // Scroll-triggered reveals
   const revealTargets = document.querySelectorAll('.reveal, .reveal-stagger, .stitch-rule, .heritage-figure');
   const io = new IntersectionObserver((entries) => {
     entries.forEach((entry) => {
@@ -836,23 +816,32 @@
   }, { threshold: 0.15, rootMargin: '0px 0px -40px 0px' });
   revealTargets.forEach((el) => io.observe(el));
 
-  // Advanced smooth 3D scroll animations
+  // AGGRESSIVE 3D scroll animations - VERY VISIBLE
   const scrollAnimateElements = document.querySelectorAll('.scroll-animate');
   
   function updateScrollAnimations() {
     scrollAnimateElements.forEach((el) => {
       const rect = el.getBoundingClientRect();
-      const centerY = window.innerHeight / 2;
-      const distance = rect.top - centerY;
-      const maxDistance = window.innerHeight;
-      const progress = Math.max(-1, Math.min(1, -distance / maxDistance));
+      const windowHeight = window.innerHeight;
+      const elementCenter = rect.top + rect.height / 2;
+      const screenCenter = windowHeight / 2;
+      
+      // Distance from center of screen (-1 to 1)
+      const distance = (elementCenter - screenCenter) / (windowHeight / 2);
+      const progress = Math.max(-1.5, Math.min(1.5, distance));
       
       const index = parseInt(el.dataset.index) || 0;
-      const rotateX = progress * 35;
-      const rotateY = (progress * 25) * (index % 2 === 0 ? 1 : -1);
-      const rotateZ = progress * 15;
-      const translateZ = progress * 50;
-      const opacity = 0.5 + (1 - Math.abs(progress)) * 0.5;
+      
+      // STRONG rotations
+      const rotateX = progress * 65; // Much stronger
+      const rotateY = (progress * 50) * (index % 2 === 0 ? 1 : -1); // Alternating
+      const rotateZ = progress * 35;
+      const translateZ = progress * 120; // More depth
+      const translateY = progress * 60;
+      const scale = 0.7 + Math.abs(progress) * 0.3;
+      
+      // Visibility based on distance
+      const opacity = Math.max(0.3, 1 - Math.abs(progress) * 0.4);
       
       el.style.transform = `
         perspective(1200px)
@@ -860,28 +849,17 @@
         rotateY(${rotateY}deg)
         rotateZ(${rotateZ}deg)
         translateZ(${translateZ}px)
-        translateY(${Math.abs(progress) * 20}px)
+        translateY(${translateY}px)
+        scale(${scale})
       `;
       el.style.opacity = opacity;
+      el.style.filter = `brightness(${0.7 + Math.abs(progress) * 0.3})`;
     });
   }
 
+  // Aggressive update on scroll
   window.addEventListener('scroll', updateScrollAnimations, { passive: true });
   updateScrollAnimations();
-
-  // Parallax effect on scroll
-  document.addEventListener('scroll', () => {
-    const scrolled = window.scrollY;
-    const heroBeforeEl = document.querySelector('.hero::before');
-    const craftBeforeEl = document.querySelector('.craft::before');
-    
-    if (heroBeforeEl) {
-      document.querySelector('.hero').style.setProperty(
-        '--hero-parallax',
-        `translateY(${scrolled * 0.4}px) rotate(${scrolled * 0.15}deg)`
-      );
-    }
-  }, { passive: true });
 </script>
 </body>
 </html>
